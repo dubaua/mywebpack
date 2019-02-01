@@ -1,0 +1,12 @@
+@import "~@/styles/shared/settings";
+
+.button {
+  background: $color-primary;
+  color: white;
+  font-size: $base;
+
+  &--contrast {
+    background: white;
+    color: black;
+  }
+}

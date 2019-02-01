@@ -1,0 +1,150 @@
+const path = require('path');
+
+module.exports.config = function(mode, root) {
+  return {
+    mode: mode,
+    context: root,
+    output: {
+      path: path.join(root, 'dist'),
+    },
+    resolve: {
+      extensions: [
+        '.js',
+        '.vue',
+        '.json',
+      ],
+      alias: {
+        '$root': root,
+        '$build': path.join(root, 'build'),
+        '@': path.join(root, 'src'),
+      },
+    },
+    module: {
+      rules: [
+        // Vue
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader'
+        },
+        // JS
+        {
+          test: /\.js$/,
+          exclude: /(node_modules)/,
+          loader: 'babel-loader'
+        },
+        // PostCSS
+        {
+          test: /\.postcss$/,
+          use: [
+            'vue-style-loader',
+            'css-loader',
+            'postcss-loader',
+          ],
+        },
+        // CSS
+        {
+          test: /\.css$/,
+          use: [
+            'vue-style-loader',
+            'css-loader',
+          ],
+        },
+        // Images
+        {
+          test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+          },
+        },
+        // Media
+        {
+          test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+          },
+        },
+        // Fonts
+        {
+          test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+          },
+        },
+      ],
+    },
+    devServer: {
+      // Serve index.html on every URL during development
+      historyApiFallback: true,
+      disableHostCheck: true,
+    },
+  }
+};
+[16:56] nomoreangels: .postcssrc
+{
+  "plugins": {
+    "postcss-import": {
+
+    },
+    "postcss-nested": {
+
+    },
+    "postcss-hexrgba": {
+
+    },
+    "postcss-preset-env": {
+      "stage": 2,
+    }
+  }
+}
+[16:56] nomoreangels: .babelrc
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "targets": {
+          "browsers": "> 2%"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import"
+  ]
+}
+[16:56] flower at grave: дима 2 стадию поддерживает
+[16:57] nomoreangels:
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "axios": "^0.18.0",
+    "vue": "^2.5.22",
+    "vue-i18n": "^8.7.0",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.3.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "postcss-hexrgba": "^1.0.1",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-nested": "^4.1.1",
+    "postcss-preset-env": "^6.5.0",
+    "rimraf": "^2.6.3",
+    "url-loader": "^1.1.2",
+    "vue-loader": "^15.5.1",
+    "vue-template-compiler": "^2.5.22",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.2.1"
+  }
